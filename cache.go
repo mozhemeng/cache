@@ -82,6 +82,10 @@ func (item *Item) value() (interface{}, error) {
 func (item *Item) ttl() time.Duration {
 	const defaultTTL = time.Hour
 
+	if item.TTL == -1 {
+		return -1
+	}
+
 	if item.TTL < 0 {
 		return 0
 	}
