@@ -86,7 +86,7 @@ func (item *Item) ttl() time.Duration {
 		return -1
 	}
 
-	if item.TTL < 0 {
+	if item.TTL <= 0 {
 		return 0
 	}
 
@@ -174,9 +174,9 @@ func (cd *Cache) set(item *Item) ([]byte, bool, error) {
 	}
 
 	ttl := item.ttl()
-	if ttl == 0 {
-		return b, true, nil
-	}
+	//if ttl == 0 {
+	//	return b, true, nil
+	//}
 
 	if item.SetXX {
 		return b, true, cd.opt.Redis.SetXX(item.Context(), item.Key, b, ttl).Err()
